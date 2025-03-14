@@ -63,3 +63,15 @@ p {
     z-index: 25;
     pointer-events: none;
 }
+
+/* Countdown Timer Style */
+.countdown {
+    font-size: 2em;
+    font-weight: bold;
+    color: #001f3f; /* Dark Blue text */
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 30;
+}
