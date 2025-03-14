@@ -47,7 +47,18 @@ setTimeout(() => {
     transitionStarted = true;
 }, 7000); // Start transition slightly before 8 seconds
 
-// Transition to final page
+// Static effect before showing the page
+setTimeout(() => {
+    document.getElementById("static").style.opacity = "0";
+}, 3000);
+
+// After 8 seconds, show TV "lost signal" glitch before transitioning
+setTimeout(() => {
+    const glitchEffect = document.createElement("div");
+    glitchEffect.classList.add("lost-signal");
+    document.body.appendChild(glitchEffect);
+}, 7900);
+
 setTimeout(() => {
     document.body.style.backgroundColor = "white";
     document.body.style.color = "#001f3f"; // Dark blue text
@@ -56,4 +67,4 @@ setTimeout(() => {
         <h1>Everything isn't as it seems.</h1>
         <h2>See you soon!</h2>
     `;
-}, 8000); // 8 seconds
+}, 8500); // 8.5 seconds
