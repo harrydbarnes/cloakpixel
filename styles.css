@@ -13,23 +13,23 @@ body {
     overflow: hidden;
 }
 
-/* TV Static Effect */
-.static-overlay {
+/* TV Static Overlay */
+.static-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('static.gif');
-    opacity: 0;
-    z-index: 15;
-    pointer-events: none;
-    animation: staticEffect 3s ease-in-out;
+    background: url('static.gif') repeat;
+    background-size: cover;
+    opacity: 1;
+    z-index: 20;
+    animation: staticFade 3s forwards;
 }
 
-@keyframes staticEffect {
-    0%, 100% { opacity: 0; }
-    10%, 30%, 50%, 70%, 90% { opacity: 0.7; }
+@keyframes staticFade {
+    0%, 10%, 30%, 50%, 70%, 90% { opacity: 0.8; }
+    100% { opacity: 0; }
 }
 
 /* Main Content */
@@ -69,20 +69,21 @@ p {
     z-index: 5;
 }
 
-/* Glitch Effect for Losing Signal */
-@keyframes glitch {
-    0%, 100% { opacity: 0; }
-    10%, 30%, 50%, 70%, 90% { opacity: 0.8; }
-}
-
+/* Final Lost Signal Effect */
 .lost-signal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('static.gif');
+    background: url('static.gif') repeat;
+    background-size: cover;
     opacity: 0;
-    z-index: 20;
-    animation: glitch 1s infinite;
+    z-index: 25;
+    animation: lostSignal 1s infinite;
+}
+
+@keyframes lostSignal {
+    0%, 100% { opacity: 0; }
+    20%, 40%, 60%, 80% { opacity: 1; }
 }
