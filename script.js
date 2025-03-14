@@ -47,12 +47,12 @@ setTimeout(() => {
     transitionStarted = true;
 }, 7000); // Start transition slightly before 8 seconds
 
-// Static effect before showing the page
+// TV static fade-out at the start
 setTimeout(() => {
-    document.getElementById("static").style.opacity = "0";
+    document.getElementById("static").style.display = "none";
 }, 3000);
 
-// After 8 seconds, show TV "lost signal" glitch before transitioning
+// At 8 seconds, show TV "lost signal" glitch before transitioning
 setTimeout(() => {
     const glitchEffect = document.createElement("div");
     glitchEffect.classList.add("lost-signal");
