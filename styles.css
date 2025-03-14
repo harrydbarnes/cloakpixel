@@ -1,1 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: navy;
+}
 
+.container {
+    transition: opacity 1s ease-in-out;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+hr {
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid navy;
+}
+
+p {
+    font-size: 1.2em;
+}
