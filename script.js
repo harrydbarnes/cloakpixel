@@ -47,24 +47,31 @@ function startCracking() {
 function tvStaticTransition() {
     const staticOverlay = document.getElementById("static");
     staticOverlay.style.opacity = "1";
+    staticOverlay.style.animation = "none"; // Reset animation
 
-    // Flicker effect for 0.3 seconds
+    // Flicker effect every 0.1s for 0.3 seconds
+    let flickerInterval = setInterval(() => {
+        staticOverlay.style.opacity = staticOverlay.style.opacity == "1" ? "0" : "1";
+    }, 100);
+
     setTimeout(() => {
+        clearInterval(flickerInterval);
         staticOverlay.style.opacity = "0";
-        resetToInitialPage();
+        showNotEverythingIsAsItSeems();
     }, 300);
 }
 
-function resetToInitialPage() {
-    document.body.style.backgroundColor = "#001f3f"; // Dark blue
-    document.body.style.color = "white"; // White text
+function showNotEverythingIsAsItSeems() {
+    document.body.style.backgroundColor = "white";
+    document.body.style.color = "#001f3f"; // Dark blue text
 
     document.getElementById("content").innerHTML = `
-        <h1>Cloak Pixel Training</h1>
-        <h2>March 26th, 27th and 31st 2025</h2>
-        <hr>
-        <p>More information to come soon - stay tuned.</p>
+        <h1>Everything isn't as it seems.</h1>
+        <h2>See you soon!</h2>
     `;
+
+    // Start countdown timer
+    startCountdown();
 
     // Hide the static effect
     document.getElementById("static").style.opacity = "0";
@@ -75,6 +82,30 @@ function resetToInitialPage() {
         startCracking();
         setTimeout(tvStaticTransition, 1000); // TV static starts after cracking
     }, nextEffectTime);
+}
+
+function startCountdown() {
+    const countdownElement = document.getElementById("countdown");
+    const targetDate = new Date("March 26, 2025 11:00:00").getTime();
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            countdownElement.innerHTML = "The event has started!";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
 }
 
 // Start the first cycle
