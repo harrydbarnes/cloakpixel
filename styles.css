@@ -5,13 +5,17 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: white;
+    background-color: #001f3f; /* Dark Blue */
     font-family: Arial, sans-serif;
     text-align: center;
-    color: navy;
+    color: white;
+    position: relative;
+    overflow: hidden;
 }
 
 .container {
+    position: relative;
+    z-index: 10;
     transition: opacity 1s ease-in-out;
 }
 
@@ -27,9 +31,20 @@ h2 {
 hr {
     width: 50%;
     margin: 20px auto;
-    border: 1px solid navy;
+    border: 1px solid white;
 }
 
 p {
     font-size: 1.2em;
+}
+
+/* Canvas to show cracking effect */
+#crackCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
 }
