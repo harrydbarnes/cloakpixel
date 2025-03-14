@@ -6,7 +6,6 @@ canvas.height = window.innerHeight;
 const cracks = [];
 const crackCount = 20;
 let opacity = 0;
-let transitionStarted = false;
 
 // Generate random cracks
 for (let i = 0; i < crackCount; i++) {
@@ -39,32 +38,29 @@ function drawCracks() {
     }
 }
 
-// Start crack animation
-const crackInterval = setInterval(drawCracks, 100);
-
+// Start crack animation at 7 seconds
 setTimeout(() => {
-    clearInterval(crackInterval);
-    transitionStarted = true;
-}, 7000); // Start transition slightly before 8 seconds
+    setInterval(drawCracks, 100);
+}, 7000);
 
-// TV static fade-out at the start
+// At 8 seconds, show TV "lost signal" effect
 setTimeout(() => {
-    document.getElementById("static").style.display = "none";
-}, 3000);
+    const staticOverlay = document.getElementById("static");
+    staticOverlay.style.opacity = "1";
+    staticOverlay.style.animation = "lostSignal 1s infinite";
+}, 8000);
 
-// At 8 seconds, show TV "lost signal" glitch before transitioning
-setTimeout(() => {
-    const glitchEffect = document.createElement("div");
-    glitchEffect.classList.add("lost-signal");
-    document.body.appendChild(glitchEffect);
-}, 7900);
-
+// At 8.5 seconds, switch to final message
 setTimeout(() => {
     document.body.style.backgroundColor = "white";
     document.body.style.color = "#001f3f"; // Dark blue text
+
     document.getElementById("content").innerHTML = `
         <img src="cloak-pixel.png" alt="CloakPixel Logo" style="width: 200px; display: block; margin: 0 auto 20px;">
         <h1>Everything isn't as it seems.</h1>
         <h2>See you soon!</h2>
     `;
-}, 8500); // 8.5 seconds
+
+    // Hide the static effect after the transition
+    document.getElementById("static").style.display = "none";
+}, 8500);
