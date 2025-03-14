@@ -38,29 +38,47 @@ function drawCracks() {
     }
 }
 
-// Start crack animation at 7 seconds
-setTimeout(() => {
+function startCracking() {
+    opacity = 0; // Reset opacity for repeated effect
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     setInterval(drawCracks, 100);
-}, 7000);
+}
 
-// At 8 seconds, show TV "lost signal" effect
-setTimeout(() => {
+function tvStaticTransition() {
     const staticOverlay = document.getElementById("static");
     staticOverlay.style.opacity = "1";
-    staticOverlay.style.animation = "lostSignal 1s infinite";
-}, 8000);
 
-// At 8.5 seconds, switch to final message
-setTimeout(() => {
-    document.body.style.backgroundColor = "white";
-    document.body.style.color = "#001f3f"; // Dark blue text
+    // Flicker effect for 0.3 seconds
+    setTimeout(() => {
+        staticOverlay.style.opacity = "0";
+        resetToInitialPage();
+    }, 300);
+}
+
+function resetToInitialPage() {
+    document.body.style.backgroundColor = "#001f3f"; // Dark blue
+    document.body.style.color = "white"; // White text
 
     document.getElementById("content").innerHTML = `
-        <img src="cloak-pixel.png" alt="CloakPixel Logo" style="width: 200px; display: block; margin: 0 auto 20px;">
-        <h1>Everything isn't as it seems.</h1>
-        <h2>See you soon!</h2>
+        <h1>Cloak Pixel Training</h1>
+        <h2>March 26th, 27th and 31st 2025</h2>
+        <hr>
+        <p>More information to come soon - stay tuned.</p>
     `;
 
-    // Hide the static effect after the transition
-    document.getElementById("static").style.display = "none";
-}, 8500);
+    // Hide the static effect
+    document.getElementById("static").style.opacity = "0";
+
+    // Schedule the effect to happen again randomly between 2-8 seconds
+    let nextEffectTime = Math.floor(Math.random() * (8000 - 2000 + 1)) + 2000; // 2 to 8 seconds
+    setTimeout(() => {
+        startCracking();
+        setTimeout(tvStaticTransition, 1000); // TV static starts after cracking
+    }, nextEffectTime);
+}
+
+// Start the first cycle
+setTimeout(() => {
+    startCracking();
+    setTimeout(tvStaticTransition, 1000); // TV static starts after cracking
+}, 7000);
