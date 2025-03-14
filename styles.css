@@ -50,7 +50,7 @@ p {
     z-index: 5;
 }
 
-/* TV Static Overlay (hidden until transition) */
+/* TV Static Overlay (hidden initially) */
 .static-screen {
     position: fixed;
     top: 0;
@@ -62,10 +62,4 @@ p {
     opacity: 0;
     z-index: 25;
     pointer-events: none;
-}
-
-/* Glitch Animation */
-@keyframes lostSignal {
-    0%, 100% { opacity: 0; }
-    20%, 40%, 60%, 80% { opacity: 1; }
 }
